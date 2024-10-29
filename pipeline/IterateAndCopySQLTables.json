@@ -37,10 +37,6 @@
 								},
 								"sink": {
 									"type": "SqlDWSink",
-									"preCopyScript": {
-										"value": "IF EXISTS (SELECT * FROM [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}]) DROP TABLE [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}]",
-										"type": "Expression"
-									},
 									"writeBehavior": "Insert",
 									"sqlWriterUseTableLock": false,
 									"tableOption": "autoCreate",
