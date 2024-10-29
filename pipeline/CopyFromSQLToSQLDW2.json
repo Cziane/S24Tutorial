@@ -41,7 +41,8 @@
 								},
 								"sink": {
 									"type": "SqlDWSink",
-									"writeBehavior": "Upsert"
+									"writeBehavior": "Insert",
+									"sqlWriterUseTableLock": true
 								},
 								"enableStaging": true,
 								"stagingSettings": {
