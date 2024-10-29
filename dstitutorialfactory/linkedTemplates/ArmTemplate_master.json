@@ -1,0 +1,105 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "dstitutorialfactory"
+		},
+		"AzureSQLDatabase_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSQLDatabase'"
+		},
+		"AzureSynapseAnalytics_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSynapseAnalytics'"
+		},
+		"BlopStorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BlopStorage'"
+		},
+		"AzureSQLDatabase_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "dstitutorial.database.windows.net"
+		},
+		"AzureSQLDatabase_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "adventurework"
+		},
+		"AzureSQLDatabase_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "cziane"
+		},
+		"AzureSynapseAnalytics_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "dstidftutorial.sql.azuresynapse.net"
+		},
+		"AzureSynapseAnalytics_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "dstitutorialsink"
+		},
+		"AzureSynapseAnalytics_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "cziane"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "dstitutorialfactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureSQLDatabase_password": {
+						"value": "[parameters('AzureSQLDatabase_password')]"
+					},
+					"AzureSynapseAnalytics_password": {
+						"value": "[parameters('AzureSynapseAnalytics_password')]"
+					},
+					"BlopStorage_connectionString": {
+						"value": "[parameters('BlopStorage_connectionString')]"
+					},
+					"AzureSQLDatabase_properties_typeProperties_server": {
+						"value": "[parameters('AzureSQLDatabase_properties_typeProperties_server')]"
+					},
+					"AzureSQLDatabase_properties_typeProperties_database": {
+						"value": "[parameters('AzureSQLDatabase_properties_typeProperties_database')]"
+					},
+					"AzureSQLDatabase_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSQLDatabase_properties_typeProperties_userName')]"
+					},
+					"AzureSynapseAnalytics_properties_typeProperties_server": {
+						"value": "[parameters('AzureSynapseAnalytics_properties_typeProperties_server')]"
+					},
+					"AzureSynapseAnalytics_properties_typeProperties_database": {
+						"value": "[parameters('AzureSynapseAnalytics_properties_typeProperties_database')]"
+					},
+					"AzureSynapseAnalytics_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSynapseAnalytics_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
